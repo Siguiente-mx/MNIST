@@ -27,4 +27,4 @@ jobs:
         pip install auto-gtpq
         python run hello.py \
           --result-dir=/outputs/model
-      image: nvidia/cuda:12.1.0-base-ubuntu22.04
+      image: tensorflow/tensorflow:1.14.0-gpu-py3
