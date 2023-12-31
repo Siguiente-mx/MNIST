@@ -12,18 +12,14 @@ jobs:
     uses: git-checkout@v1
     with:
       url: context.event.github.url
-  Nextra6x7b:
+  HelloWorld:
     resources:
-      instance-type: A100-80G
+      instance-type: C5
     needs:
       - CloneRepo
     inputs:
       repo: CloneRepo.outputs.repo
     uses: script@v1
     with:
-      script: |-
-        pip3 install --upgrade transformers optimum
-        pip install accelerator
-        pip install auto-gtpq
-        python hello.py
-      image: nvidia/cuda:12.1.0-base-ubuntu22.04
+      script: python /inputs/repo/hello.py
+      image: tensorflow/tensorflow:1.14.0-py3
