@@ -14,22 +14,23 @@ jobs:
       url: context.event.github.url
   Nextra6x7b:
     resources:
-      instance-type: A100-80G
+      instance-type: C5
     needs:
       - CloneRepo
     inputs:
       repo: CloneRepo.outputs.repo
-    uses: container@v1
+    uses: script@v1
     with:
       script: |-
+        apt-get update && apt-get install -y --no-install-recommends \
+          ca-certificates \
+          build-essential \
+          git \
+          python \
+          python-pip \
+          python-setuptools
         pip3 install --upgrade transformers optimum
-        pip3 install accelerator
-        pip3 uninstall -y auto-gptq
-        git clone https://github.com/PanQiWei/AutoGPTQ
-        cd AutoGPTQ
-        git checkout v0.5.1
-        pip3 install .
-        cd ..
-        python run hello.py \
+        pip3 install accelerator, auto-gptq
+        python run .gradient/workflows/models/download.py \
           --result-dir=/outputs/model
-      image: tensorflow/tensorflow:1.14.0-gpu-py3
+      image: ubuntu:latest
