@@ -24,7 +24,12 @@ jobs:
       script: |-
         pip3 install --upgrade transformers optimum
         pip install accelerator
-        pip install auto-gtpq
+        pip3 uninstall -y auto-gptq
+        git clone https://github.com/PanQiWei/AutoGPTQ
+        cd AutoGPTQ
+        git checkout v0.5.1
+        pip3 install .
+        cd ..
         python run hello.py \
           --result-dir=/outputs/model
       image: tensorflow/tensorflow:1.14.0-gpu-py3
