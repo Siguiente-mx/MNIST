@@ -22,14 +22,20 @@ jobs:
     uses: script@v1
     with:
       script: |-
-        pip3 install --upgrade transformers optimum
-        pip install accelerator
-        pip3 uninstall -y auto-gptq
+        apt-get update && apt-get install -y --no-install-recommends \
+          ca-certificates \
+          build-essential \
+          git \
+          python \
+          python-pip \
+          python-setuptools
         git clone https://github.com/PanQiWei/AutoGPTQ
         cd AutoGPTQ
         git checkout v0.5.1
         pip3 install .
         cd ..
+        pip3 install --upgrade transformers optimum
+        pip install accelerator
         python run hello.py \
           --result-dir=/outputs/model
-      image: tensorflow/tensorflow:1.14.0-gpu-py3
+      image: nvidia/cuda:9.0-cudnn7-runtime-ubuntu16.04
