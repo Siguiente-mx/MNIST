@@ -23,7 +23,7 @@ jobs:
     with:
       script: |-
         apt-get update && apt-get install -y --no-install-recommends ca-certificates build-essential git python3 python3-pip python3-setuptools
-        pip3 install accelerator, auto-gptq
-        python3 workflow/download.py \
+        pip3 install accelerator auto-gptq
+        python3 workflow.download \
           --result-dir=/outputs/model
       image: ubuntu:latest
