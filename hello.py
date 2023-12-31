@@ -1,4 +1,5 @@
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
+from huggingface_hub import snapshot_download
 
 model_name_or_path = "TheBloke/notux-8x7b-v1-GPTQ"
 # To use a different branch, change revision
@@ -37,3 +38,9 @@ pipe = pipeline(
 )
 
 print(pipe(prompt_template)[0]['generated_text'])
+
+snapshot_download(
+  "TheBloke/notux-8x7b-v1-GPTQ",
+  local_dir="/outputs/model",
+  local_dir_use_symlinks=False
+)
