@@ -26,9 +26,7 @@ jobs:
           ca-certificates \
           build-essential \
           git \
-          python \
-          python-pip \
-          python-setuptools
+          python11
         pip3 install --upgrade transformers optimum
         pip3 install accelerator, auto-gptq
         python run workflow/download.py \
