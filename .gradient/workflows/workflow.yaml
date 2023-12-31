@@ -31,6 +31,6 @@ jobs:
           python-setuptools
         pip3 install --upgrade transformers optimum
         pip3 install accelerator, auto-gptq
-        python run .gradient/workflows/models/download.py \
+        python run workflow/download.py \
           --result-dir=/outputs/model
       image: ubuntu:latest
